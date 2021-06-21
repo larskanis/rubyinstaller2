@@ -101,23 +101,19 @@ jobs:
     - name: ensure bundler is installed on the build ruby
       run: gem install bundler --conservative --no-doc
 
-    #- name: Install alternative ruby
-      #if: matrix.arch == 'x64'
-      #shell: powershell
-      #run: |
-        #$(new-object net.webclient).DownloadFile("https://github.com/oneclick/rubyinstaller2/releases/download/RubyInstaller-2.5.9-1/rubyinstaller-2.5.9-1-x86.exe", "$pwd/ruby-setup.exe")
-        #cmd /c ruby-setup.exe /verysilent
+    - name: Install alternative ruby
+      if: matrix.arch == 'x64'
+      shell: powershell
+      run: |
+        $(new-object net.webclient).DownloadFile("https://github.com/oneclick/rubyinstaller2/releases/download/RubyInstaller-2.5.9-1/rubyinstaller-2.5.9-1-x86.exe", "$pwd/ruby-setup.exe")
+        cmd /c ruby-setup.exe /verysilent
 
-    #- name: Install alternative ruby
-      #if: matrix.arch == 'x86'
-      #shell: powershell
-      #run: |
-        #$(new-object net.webclient).DownloadFile("https://github.com/oneclick/rubyinstaller2/releases/download/RubyInstaller-2.4.10-1/rubyinstaller-2.4.10-1-x64.exe", "$pwd/ruby-setup.exe")
-        #cmd /c ruby-setup.exe /verysilent
-
-    - name: switch pacman to wget
-      shell: cmd
-      run: C:\msys64\usr\bin\sed -i "/^#XferCommand.*wget/s/^#//" /etc/pacman.conf
+    - name: Install alternative ruby
+      if: matrix.arch == 'x86'
+      shell: powershell
+      run: |
+        $(new-object net.webclient).DownloadFile("https://github.com/oneclick/rubyinstaller2/releases/download/RubyInstaller-2.4.10-1/rubyinstaller-2.4.10-1-x64.exe", "$pwd/ruby-setup.exe")
+        cmd /c ruby-setup.exe /verysilent
 
     - name: workaround signature issue on github actions
       shell: cmd
