@@ -11,45 +11,45 @@ jobs:
       fail-fast: false
       matrix:
         include:
-        - target_ruby: "3.0.1"
-          arch: "x86"
-          build_ruby: "2.7.3/x64"
-          run_mri_spec: ruby_3_0
+        #- target_ruby: "3.0.1"
+          #arch: "x86"
+          #build_ruby: "2.7.3/x64"
+          #run_mri_spec: ruby_3_0
 
-        - target_ruby: "3.0.1"
-          arch: "x64"
-          build_ruby: "2.7.3/x64"
-          run_mri_spec: ruby_3_0
+        #- target_ruby: "3.0.1"
+          #arch: "x64"
+          #build_ruby: "2.7.3/x64"
+          #run_mri_spec: ruby_3_0
 
-        - target_ruby: "2.7.3"
-          arch: "x86"
-          build_ruby: "2.6.7/x64"
-          run_ruby_spec: true
+        #- target_ruby: "2.7.3"
+          #arch: "x86"
+          #build_ruby: "2.6.7/x64"
+          #run_ruby_spec: true
 
-        - target_ruby: "2.7.3"
-          arch: "x64"
-          build_ruby: "2.6.7/x64"
-          run_ruby_spec: true
+        #- target_ruby: "2.7.3"
+          #arch: "x64"
+          #build_ruby: "2.6.7/x64"
+          #run_ruby_spec: true
 
-        - target_ruby: "2.6.7"
-          arch: "x64"
-          build_ruby: "2.5.9/x64"
-          run_ruby_spec: true
+        #- target_ruby: "2.6.7"
+          #arch: "x64"
+          #build_ruby: "2.5.9/x64"
+          #run_ruby_spec: true
 
-        - target_ruby: "2.5.9"
-          arch: "x64"
-          build_ruby: "2.4.10/x64"
-          run_ruby_spec: true
+        #- target_ruby: "2.5.9"
+          #arch: "x64"
+          #build_ruby: "2.4.10/x64"
+          #run_ruby_spec: true
 
-        - target_ruby: "2.6.7"
-          arch: "x86"
-          build_ruby: "2.5.9/x64"
-          run_ruby_spec: true
+        #- target_ruby: "2.6.7"
+          #arch: "x86"
+          #build_ruby: "2.5.9/x64"
+          #run_ruby_spec: true
 
-        - target_ruby: "2.5.9"
-          arch: "x86"
-          build_ruby: "2.4.10/x64"
-          run_ruby_spec: true
+        #- target_ruby: "2.5.9"
+          #arch: "x86"
+          #build_ruby: "2.4.10/x64"
+          #run_ruby_spec: true
 
         - target_ruby: "head"
           arch: "x64"
@@ -67,7 +67,7 @@ jobs:
       target_ruby: ${{ matrix.target_ruby }}
       run_mri_spec: ${{ matrix.run_mri_spec }}
       run_ruby_spec: ${{ matrix.run_ruby_spec }}
-      PATH: C:/hostedtoolcache/windows/Ruby/${{ matrix.build_ruby }}/bin;c:/Program Files/Git/cmd;c:/Program Files (x86)/Inno Setup 6;c:/Windows/system32;C:/Windows/System32/WindowsPowerShell/v1.0
+      #PATH: C:/hostedtoolcache/windows/Ruby/${{ matrix.build_ruby }}/bin;c:/Program Files/Git/cmd;c:/Program Files (x86)/Inno Setup 6;c:/Windows/system32;C:/Windows/System32/WindowsPowerShell/v1.0
 
     steps:
     - name: configure git crlf
@@ -101,27 +101,27 @@ jobs:
     - name: ensure bundler is installed on the build ruby
       run: gem install bundler --conservative --no-doc
 
-    - name: Install alternative ruby
-      if: matrix.arch == 'x64'
-      shell: powershell
-      run: |
-        $(new-object net.webclient).DownloadFile("https://github.com/oneclick/rubyinstaller2/releases/download/RubyInstaller-2.5.9-1/rubyinstaller-2.5.9-1-x86.exe", "$pwd/ruby-setup.exe")
-        cmd /c ruby-setup.exe /verysilent
+    #- name: Install alternative ruby
+      #if: matrix.arch == 'x64'
+      #shell: powershell
+      #run: |
+        #$(new-object net.webclient).DownloadFile("https://github.com/oneclick/rubyinstaller2/releases/download/RubyInstaller-2.5.9-1/rubyinstaller-2.5.9-1-x86.exe", "$pwd/ruby-setup.exe")
+        #cmd /c ruby-setup.exe /verysilent
 
-    - name: Install alternative ruby
-      if: matrix.arch == 'x86'
-      shell: powershell
-      run: |
-        $(new-object net.webclient).DownloadFile("https://github.com/oneclick/rubyinstaller2/releases/download/RubyInstaller-2.4.10-1/rubyinstaller-2.4.10-1-x64.exe", "$pwd/ruby-setup.exe")
-        cmd /c ruby-setup.exe /verysilent
+    #- name: Install alternative ruby
+      #if: matrix.arch == 'x86'
+      #shell: powershell
+      #run: |
+        #$(new-object net.webclient).DownloadFile("https://github.com/oneclick/rubyinstaller2/releases/download/RubyInstaller-2.4.10-1/rubyinstaller-2.4.10-1-x64.exe", "$pwd/ruby-setup.exe")
+        #cmd /c ruby-setup.exe /verysilent
 
-    - name: switch pacman to wget
-      shell: cmd
-      run: C:\msys64\usr\bin\sed -i "/^#XferCommand.*wget/s/^#//" /etc/pacman.conf
+    #- name: switch pacman to wget
+      #shell: cmd
+      #run: C:\msys64\usr\bin\sed -i "/^#XferCommand.*wget/s/^#//" /etc/pacman.conf
 
-    - name: workaround signature issue on github actions
-      shell: cmd
-      run: C:\msys64\usr\bin\sed -i "/^SigLevel/ s/$/ DatabaseOptional/" /etc/pacman.conf
+    #- name: workaround signature issue on github actions
+      #shell: cmd
+      #run: C:\msys64\usr\bin\sed -i "/^SigLevel/ s/$/ DatabaseOptional/" /etc/pacman.conf
 
     - name: Update MSYS2
       shell: cmd
