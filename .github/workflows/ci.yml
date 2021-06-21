@@ -67,7 +67,7 @@ jobs:
       target_ruby: ${{ matrix.target_ruby }}
       run_mri_spec: ${{ matrix.run_mri_spec }}
       run_ruby_spec: ${{ matrix.run_ruby_spec }}
-      #PATH: C:/hostedtoolcache/windows/Ruby/${{ matrix.build_ruby }}/bin;c:/Program Files/Git/cmd;c:/Program Files (x86)/Inno Setup 6;c:/Windows/system32;C:/Windows/System32/WindowsPowerShell/v1.0
+      PATH: C:/hostedtoolcache/windows/Ruby/${{ matrix.build_ruby }}/bin;c:/Program Files/Git/cmd;c:/Program Files (x86)/Inno Setup 6;c:/Windows/system32;C:/Windows/System32/WindowsPowerShell/v1.0
 
     steps:
     - name: configure git crlf
@@ -119,9 +119,9 @@ jobs:
       #shell: cmd
       #run: C:\msys64\usr\bin\sed -i "/^#XferCommand.*wget/s/^#//" /etc/pacman.conf
 
-    #- name: workaround signature issue on github actions
-      #shell: cmd
-      #run: C:\msys64\usr\bin\sed -i "/^SigLevel/ s/$/ DatabaseOptional/" /etc/pacman.conf
+    - name: workaround signature issue on github actions
+      shell: cmd
+      run: C:\msys64\usr\bin\sed -i "/^SigLevel/ s/$/ DatabaseOptional/" /etc/pacman.conf
 
     - name: Update MSYS2
       shell: cmd
