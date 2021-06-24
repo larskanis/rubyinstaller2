@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+
+url="$1"
+fname="$2"
+
+# Work around pacman issue that doesn't download .sig files with XferCommand
+
+if [[ "$fname" == *.db.part ]]; then
+    /usr/bin/wget -O "${fname%.part}".sig "$url".sig
+fi
+/usr/bin/wget -O "$fname" "$url"
