@@ -120,7 +120,7 @@ jobs:
       run: |
           copy /B /Y pacman-downloader "c:/msys64/usr/bin/pacman-downloader"
           echo [options] >> c:/msys64/etc/pacman.conf
-          echo XferCommand = /usr/bin/pacman-downloader %u %o >> c:/msys64/etc/pacman.conf
+          echo XferCommand = /usr/bin/pacman-downloader %%u %%o >> c:/msys64/etc/pacman.conf
 
     - name: Update MSYS2
       shell: cmd
