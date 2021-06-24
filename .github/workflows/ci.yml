@@ -119,9 +119,9 @@ jobs:
       shell: cmd
       run: C:\msys64\usr\bin\sed -i "/^#XferCommand.*curl/s/^#//" /etc/pacman.conf
 
-    - name: workaround signature issue on github actions
+    - name: Update MSYS2 keyring
       shell: cmd
-      run: C:\msys64\usr\bin\sed -i "/^SigLevel/ s/$/ DatabaseOptional/" /etc/pacman.conf
+      run: C:\msys64\usr\bin\bash -c "/usr/bin/pacman -U --noconfirm --config <(echo) resources/packages/msys2-keyring-1~20210213-2-any.pkg.tar.zst"
 
     - name: Update MSYS2
       shell: cmd
