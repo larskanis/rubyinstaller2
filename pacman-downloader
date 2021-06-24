@@ -3,6 +3,9 @@
 url="$1"
 fname="$2"
 
+echo url: $url
+echo fname: $fname
+
 # Work around pacman issue that doesn't download .sig files with XferCommand
 
 if [[ "$fname" == *.db.part ]]; then
